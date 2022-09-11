@@ -1,0 +1,39 @@
+body {
+  background-image: url("../images/watercolorBackground.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+  background-position: bottom;
+}
+
+#mainDiv {
+  width: 100%;
+  padding-top: 8%;
+
+}
+
+.weekTitle {
+  padding-left: 5%; 
+  padding-top: 40px; 
+  padding-bottom: 0px; 
+  margin:auto; 
+  font-size:30px; 
+  color:#8f9094
+}
+
+.question {
+  padding-left: 7%; 
+  padding-top: 5px; 
+  font-size:20px; 
+  margin:auto; 
+  color: #a8a8aa
+}
+
+.answer {
+  padding-left: 7%; 
+  font-size: 15px; 
+  padding-right: 5%;
+  padding-top: 5px; 
+  margin:auto; 
+  color:#020202;
+}
