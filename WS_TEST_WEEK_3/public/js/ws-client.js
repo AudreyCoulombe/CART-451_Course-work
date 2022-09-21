@@ -22,6 +22,10 @@ window.onload = function () {
        saveTextA(ws,jsonParse.payload);
     }
 
+    document.querySelector("#button_1R").addEventListener("click", function (event) {
+      event.preventDefault();
+     //A:::make a request for A text
+
     //OPTION 1:: 
     // Web Socket is connected, send data using send()
     //ws.send(`Sending a Message from ${myID}`);
@@ -32,6 +36,10 @@ window.onload = function () {
       //let receivedMsg = event.data;
       let jsonParse = JSON.parse(event.data);
       console.log("Message is received..." + jsonParse.payload);
+      if(jsonParse.eventName ==="text_one_r"){
+        //B::: put into A
+        document.querySelector("#response_A").textContent = jsonParse.payload;
+      }
     };
 
   } //on open

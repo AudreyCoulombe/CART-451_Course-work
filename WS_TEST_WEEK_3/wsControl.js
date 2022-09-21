@@ -1,3 +1,5 @@
+// server file
+
 
 const express = require('express');
 const portNumber = 4200;
@@ -70,6 +72,19 @@ function saveTextA(ws,text){
     fileReaderInstance.writeTextSync(text);
     //OR
       //  fileReaderInstance.appendTextSync(text);
+}
+
+function readAndSendA(ws){
+    //send back
+    //OUTPUT RAW/UTF
+    let theDataRead = fileReaderInstance.readTextSync(); 
+    console.log(theDataRead);
+    ws.send(JSON.stringify({ eventName: 'text_one_r', payload: theDataRead }));
+    if (jsonParse.eventName === "read_one") {
+        console.log("read-one");;
+         readAndSendA(ws);
+      }
+
 }
 
 // // IMPLEMENT THE BROADCAST FUNCTION TO ALL
