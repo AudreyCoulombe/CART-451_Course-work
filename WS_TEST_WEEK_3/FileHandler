@@ -1,0 +1,22 @@
+// note: uppercase in file name for objects (class definition) to help differenciate it
+
+const fs = require('fs');
+
+class FileHandler{
+    constructor(fileName){
+        // pass the file name in the constructor
+        this.fileContainer = fileName;
+    }
+    //could also be used to write to a database
+    appendTextSync(textToAppend){
+     fs.appendFileSync(this.fileContainer, textToAppend);
+    }
+    //could also be used to write to a database
+    writeTextSync(texttoOverWrite){
+        fs.writeFileSync(this.fileContainer, texttoOverWrite);
+    }
+ 
+}
+
+//has to be at bottom
+module.exports = FileHandler;

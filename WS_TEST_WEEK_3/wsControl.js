@@ -2,6 +2,8 @@
 const express = require('express');
 const portNumber = 4200;
 const WebSocket = require("ws");
+const FileHandler = require('./FileHandler');
+let fileReaderInstance = new FileHandler('./myFiles/inputC.txt');
 
 
 
@@ -10,7 +12,7 @@ const WebSocket = require("ws");
         const wss = new WebSocket.Server({ server });
         // create a server (using the Express framework object)
         app.use(express.static(__dirname + '/public'));
-        app.use('/client', wsClientRequestRoute);
+        app.use('/client', wsClientRequestRoute); //--> run this file with terminal and go to http://localhost:4200/client
 
         //default route
     app.get('/', function (req, res) {
