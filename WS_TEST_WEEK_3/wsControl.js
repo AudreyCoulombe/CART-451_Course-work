@@ -3,7 +3,7 @@ const express = require('express');
 const portNumber = 4200;
 const WebSocket = require("ws");
 const FileHandler = require('./FileHandler');
-let fileReaderInstance = new FileHandler('./myFiles/inputC.txt');
+let fileReaderInstance = new FileHandler('./myFiles/inputC.txt'); 
 
 
 
@@ -47,6 +47,12 @@ wss.on('connection', function connection(ws, req) {
            sendInitMessage(ws,req);
 
         }
+
+        if (jsonParse.eventName === "text_one") {//event name sent from client sjould be text_one
+            console.log("write-one");
+            console.log(jsonParse.payload);
+             saveTextA(ws,jsonParse.payload);
+        }
       
     }); //one
 }); //connect
@@ -57,6 +63,14 @@ function sendInitMessage(ws ,req){
     ws.send(JSON.stringify({ eventName: 'server_connect', payload: "success init" }));
 }
 
+function saveTextA(ws,text){
+    ws.send(
+        JSON.stringify({ eventName: 'text_one_s', payload: "success for text one" })
+    );
+    fileReaderInstance.writeTextSync(text);
+    //OR
+      //  fileReaderInstance.appendTextSync(text);
+}
 
 // // IMPLEMENT THE BROADCAST FUNCTION TO ALL
 // wss.broadcast = function broadcast(data) {

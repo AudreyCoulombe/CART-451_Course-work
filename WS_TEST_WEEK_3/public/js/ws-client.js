@@ -16,6 +16,12 @@ window.onload = function () {
   //1: when the connection is open (setup)
   ws.onopen = function () {
 
+    if (jsonParse.eventName === "text_one") {
+      console.log("write-one");
+      console.log(jsonParse.payload);
+       saveTextA(ws,jsonParse.payload);
+    }
+
     //OPTION 1:: 
     // Web Socket is connected, send data using send()
     //ws.send(`Sending a Message from ${myID}`);
