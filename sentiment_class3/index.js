@@ -1,3 +1,6 @@
+//run this in terminal and go to http://localhost:4200/clientSentiment
+//note: according to meaning of sentence input, I will have a score indicating how positive (happy, fun, etc.) my sentence is
+
 //import the Express library
 let express = require('express');
 const portNumber =4200;
