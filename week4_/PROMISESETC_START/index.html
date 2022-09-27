@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <h1>** PROMISES AND ASYNCH **</h1>
+    <div class="outer-wrapper">
+      <!-- for option one -->
+      <div class="option-div aEx">
+        <input type="text" id="user-string-A" value="Enter user name" />
+        <button class="btn btn-default" id="callbackA">
+          Fetch Option: Callback
+        </button>
+        <hr />
+        <div class="content-div" id="responseA">RESPONSE</div>
+      </div>
+
+      <!-- for option two-->
+      <div class="option-div aEx">
+        <input type="text" id="user-string-B" value="Enter user name" />
+        <button class="btn btn-default" id="callbackB">
+          Fetch Option : Promises
+        </button>
+
+        <hr />
+        <div class="content-div" id="responseB">RESPONSE</div>
+      </div>
+
+      <!-- for option three (files + promises)-->
+      <div class="option-div bEx">
+        <button class="btn btn-default" id="callbackC">Get Data : Local</button>
+
+        <hr />
+        <div class="content-div" id="responseC">RESPONSE</div>
+      </div>
+
+      <!-- for option four (files + promises)-->
+      <div class="option-div bEx">
+        <button class="btn btn-default" id="callbackD">
+          Get Data : Remote
+        </button>
+
+        <hr />
+        <div class="content-div" id="responseD">RESPONSE A</div>
+        <div class="content-div" id="responseE">RESPONSE B</div>
+        <div class="content-div" id="responseF">RESPONSE C</div>
+      </div>
+      <!-- for option four (files + fetch)-->
+      <div class="option-div bEx">
+        <button class="btn btn-default" id="callbackG">
+          Get Data : FETCH API
+        </button>
+
+        <hr />
+        <div class="content-div" id="responseG">RESPONSE A</div>
+        <div class="content-div" id="responseH">RESPONSE B</div>
+        <div class="content-div" id="responseI">RESPONSE C</div>
+      </div>
+         
+
+           <!-- ASYNCH -->
+      <div class="option-div cEx">
+        <input type="text" id="user-string-J" value="Enter user name" />
+        <button class="btn btn-default" id="callbackJ">
+          Get Data : ASYNCH
+        </button>
+
+        <hr />
+        <div class="content-div" id="responseJ">RESPONSE </div>
+      </div>
+       <!--outer-->
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/callbackOptionCART451.js"></script>
+    <script src="js/promiseOptionCART451.js"></script>
+    <script src="js/promiseOption_FILES_CART451.js"></script>
+    <script src="js/asynchOptionCART451.js"></script>
+  </body>
+</html>
