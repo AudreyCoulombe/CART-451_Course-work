@@ -18,6 +18,8 @@ buttonCallA.addEventListener("click", () => {
   // let returnedFruit=checkAuth_A(document.querySelector("#user-string-A").value);
   // console.log(returnedFruit);
   // changeString_A(returnedFruit);
+  // changeString_B(returnedFruit);
+  changeString_C(returnedFruit);
 });
 
 /*** option 1 :: everything happens as single functions */
@@ -46,21 +48,21 @@ function checkAuth_A(userString) {
 
 // /*** option 2 :: callback  */
 // //cb ==callback
-// function checkAuth_B(userString, cb) {
-//   //console.log(userString);
-//   setTimeout(() => {
-//     let userFruit = "";
-//     if (userString === "Sabine") {
-//       userFruit = "pineapple";
-//     } else {
-//       userFruit = "noFruit";
-//     }
-//     console.log("time-out one-b complete " + userFruit);
+function checkAuth_B(userString, cb) {
+  //console.log(userString);
+  setTimeout(() => {
+    let userFruit = "";
+    if (userString === "Sabine") {
+      userFruit = "pineapple";
+    } else {
+      userFruit = "noFruit";
+    }
+    console.log("time-out one-b complete " + userFruit);
 
-//     //CALL the callback function :)
-//     cb(userFruit);
-//   }, 5000); // let 5 secs go past then send back
-// }
+    //CALL the callback function :)
+    cb(userFruit);
+  }, 5000); // let 5 secs go past then send back
+}
 
 // function changeString_B(fruitString) {
 //   //console.log(userString);
@@ -74,22 +76,22 @@ function checkAuth_A(userString) {
 
 //for second-part of option callback - change string now also takes a callback parameter
 
-// function checkAuth_C(userString, cb) {
-//   //console.log(userString);
-//   setTimeout(() => {
-//     let userFruit = "";
-//     if (userString === "Sabine") {
-//       userFruit = "pineapple";
-//     } else {
-//       userFruit = "noFruit";
-//     }
-//     console.log("time-out one-c complete " + userFruit);
+function checkAuth_C(userString, cb) {
+  //console.log(userString);
+  setTimeout(() => {
+    let userFruit = "";
+    if (userString === "Sabine") {
+      userFruit = "pineapple";
+    } else {
+      userFruit = "noFruit";
+    }
+    console.log("time-out one-c complete " + userFruit);
 
-//     //CALL the callback function :)
-//     //AND the other callback
-//     cb(userFruit, sendBackToUser);
-//   }, 5000); // let 5 secs go past then send back
-// }
+    //CALL the callback function :)
+    //AND the other callback
+    cb(userFruit, sendBackToUser);
+  }, 5000); // let 5 secs go past then send back
+}
 
 // function changeString_C(fruitString, cb) {
 //   //console.log(userString);
