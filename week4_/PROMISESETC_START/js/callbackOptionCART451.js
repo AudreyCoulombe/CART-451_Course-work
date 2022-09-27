@@ -15,23 +15,25 @@ const responseA = document.querySelector("#responseA");
 
 buttonCallA.addEventListener("click", () => {
   console.log("click");
-
+  // let returnedFruit=checkAuth_A(document.querySelector("#user-string-A").value);
+  // console.log(returnedFruit);
+  // changeString_A(returnedFruit);
 });
 
-// /*** option 1 :: everything happens as single functions */
-// function checkAuth_A(userString) {
-//   //console.log(userString);
-//   setTimeout(() => {
-//     let userFruit = "";
-//     if (userString === "Sabine") {
-//       userFruit = "pineapple";
-//     } else {
-//       userFruit = "noFruit";
-//     }
-//     console.log("time-out one-a complete " + userFruit);
-//     return userFruit;
-//   }, 5000); // let 5 secs go past then send back
-// }
+/*** option 1 :: everything happens as single functions */
+function checkAuth_A(userString) {
+  //console.log(userString);
+  setTimeout(() => {
+    let userFruit = "";
+    if (userString === "Sabine") {
+      userFruit = "pineapple";
+    } else {
+      userFruit = "noFruit";
+    }
+    console.log("time-out one-a complete " + userFruit);
+    return userFruit;
+  }, 5000); // let 5 secs go past then send back
+}
 
 // function changeString_A(fruitString) {
 //   //console.log(userString);
