@@ -48,21 +48,21 @@ function checkAuth_A(userString) {
 
 // /*** option 2 :: callback  */
 // //cb ==callback
-function checkAuth_B(userString, cb) {
-  //console.log(userString);
-  setTimeout(() => {
-    let userFruit = "";
-    if (userString === "Sabine") {
-      userFruit = "pineapple";
-    } else {
-      userFruit = "noFruit";
-    }
-    console.log("time-out one-b complete " + userFruit);
+// function checkAuth_B(userString, cb) {
+//   //console.log(userString);
+//   setTimeout(() => {
+//     let userFruit = "";
+//     if (userString === "Sabine") {
+//       userFruit = "pineapple";
+//     } else {
+//       userFruit = "noFruit";
+//     }
+//     console.log("time-out one-b complete " + userFruit);
 
-    //CALL the callback function :)
-    cb(userFruit);
-  }, 5000); // let 5 secs go past then send back
-}
+//     //CALL the callback function :)
+//     cb(userFruit);
+//   }, 5000); // let 5 secs go past then send back
+// }
 
 // function changeString_B(fruitString) {
 //   //console.log(userString);
