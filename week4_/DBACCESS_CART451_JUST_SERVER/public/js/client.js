@@ -1,7 +1,12 @@
+//run server (node server.js) and go to http://localhost:4200/client
+
+
 window.onload = function () {
   console.log("we are loaded");
 
   //GET
+  // When you go to http://localhost:4200/client and input text in "sample search form", it will display text in terminal
+  // Event listener for "send data" button (with id findData) 
   document.querySelector("#findData").addEventListener('click', function(event){
 
     let searchCrit =   document.getElementById("searchCrit").value;
@@ -16,6 +21,8 @@ window.onload = function () {
 });//click
 
   //POST NOTE this is specific for airbnb data set - you change according to your wishes!
+   // When you go to http://localhost:4200/client and input text in "sample addin form" it will display input as JSON in terminal
+  // Event listener for "send data" button (with id sendData) 
   document.querySelector("#sendData").addEventListener('click', 
     function(event){
       event.preventDefault();
