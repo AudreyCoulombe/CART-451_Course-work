@@ -28,17 +28,27 @@ let db = mongoose.connection;
 db.once("open", async function () {
   console.log("connecting to DB");
 
-  // To convert/update each field in the collection to be from a string to an integer or decimal (float/double). (NOTE: only because my values in my db are written as a string and I are labeled as Numbers in DBSchema.js)
-  let test = await fitBitModel.updateMany({}, [{ $set: { "TrackerDistance": { $toDouble: "$TrackerDistance" } } }], { multi: true });
-  fitBitModel.find({ TrackerDistance: 9.80000019073486 }).then((result) => { // Find all documents with value 13162 for the key "TotalSteps"
+  // Below: Requires to set values as string in DBSchema.js
+    // fitBitModel.findOne({TotalSteps:"13162"}).then((result)=>{ // Find only one document with value 13162 for the key "TotalSteps"
+    // fitBitModel.find({TotalSteps:"15355", Calories:"2013"}).then((result)=>{ // Find document with value "15355" for the key "TotalSteps" and value "2013" for "Calories"
+    // fitBitModel.find({TotalSteps:"13162"}).then((result)=>{ // Find all documents with value 13162 for the key "TotalSteps"
+    //   console.log(result);
+    // })
 
-  //fitBitModel.findOne({TotalSteps:"13162"}).then((result)=>{ // Find only one document
-  //fitBitModel.find({TotalSteps:"15355", Calories:"2013"}).then((result)=>{ // Find document with value "15355" for the key "TotalSteps" and value "2013" for "Calories"
-  //fitBitModel.find({Calories:{$gte 1900}}).then((result)=>{ // Find document with value "15355" for the key "TotalSteps" and value "2013" for "Calories"
-  //fitBitModel.find({TotalSteps:"13162"}).then((result)=>{ // Find all documents with value 13162 for the key "TotalSteps"
-  //fitBitModel.findOne({TotalSteps:"13162"}).then((result)=>{
-    console.log(result);
-  })
+  // Below: Requires to set values as Numbers in DBSchema.js
+    // To convert/update each field in the collection to be from a string to an integer or decimal (float/double). (NOTE: only because my values in my db are written as a string and I are labeled as Numbers in DBSchema.js)
+    let trackerDistanceToNumber = await fitBitModel.updateMany({/*Filter documents.Keep empty for all documents*/}, [{ $set: { "TrackerDistance": { $toDouble: "$TrackerDistance" } } }], { multi: true });
+    let caloriesToNumber = await fitBitModel.updateMany({/*Filter documents.Keep empty for all documents*/}, [{ $set: { "Calories": { $toDouble: "$Calories" } } }], { multi: true });
+    // fitBitModel.find({ TrackerDistance: 9.80000019073486 }).then((result) => { // Find all documents with value 13162 for the key "TotalSteps"
+    // fitBitModel.find({TrackerDistance:{$gte: 25}}).then((result)=>{ // Find document with value greater than or equal to ($gte) 25 for the key "TrackerDistance"
+    // fitBitModel.find({Calories:{$gte: 10}, TrackerDistance:{$gte: 25}}).then((result)=>{ // Find document with value greater than or equal to ($gte) 10 for the key "Calories" + greater than or equal to 25 for the key "TrackerDistance"
+    fitBitModel.find({Calories:{$gte: 10}, TrackerDistance:{$gte: 25}},'TotalSteps TrackerDistance Calories').then((result)=>{ // print only TotalSteps, TrackerDistance and Calories
+      console.log(result); // Note: output result = array, so you can work with it as you work with arrays
+    })
+
+    // Count the number of documents that have a TrackerDistance greater than or equal to 25
+    let docCount = await fitBitModel.countDocuments({TrackerDistance:{$gte: 25}}); // Note: await is needed to add a delay, or else it will look for it too quickly and won't find it
+    console.log(docCount);
 });
 
 // make server listen for incoming messages
