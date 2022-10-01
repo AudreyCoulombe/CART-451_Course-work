@@ -25,12 +25,10 @@ mongoose.connect(url);
 let db = mongoose.connection;
 db.once("open", async function(){
   console.log("connecting to DB");
-  // fitBitDataModel.find({TotalSteps:"13162"}).then((result)=>{
-  fitBitDataModel.find({TotalSteps:13162}).then((result)=>{
+  fitBitModel.find({TotalSteps:"13162"}).then((result)=>{
     console.log(result);
   })
 });
-
 
 // make server listen for incoming messages
 server.listen(portNumber, function () {
