@@ -81,10 +81,10 @@ db.once("open", async function () {
     // });
 
     // ------------- Query 5: ----------  
-    fitBitModel.find({TotalSteps:{$gte: 10000}, VeryActiveMinutes:{$gte: 20}}, 'Id').then((result)=>{
-         console.log(result);
-    });
-    
+    // const result = fitBitModel.findOne({}, 'Id').explain('TotalSteps');
+    // console.log(result);
+    // fitBitModel.setOptions({ maxTimeMS: 1000 });
+    fitBitModel.getOptions(); // { limit: 10, maxTimeMS: 1000 }
 });
 
 // make server listen for incoming messages
