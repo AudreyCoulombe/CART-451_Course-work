@@ -15,10 +15,10 @@ window.onload = function () {
       {paramOne : searchCrit},
      // if we get a response from the server .... 
       function(response) {
-         console.log(response);
-         
-  })
-});//click
+         console.log(response); // response coming from server.js
+      }
+    )
+  });//click
 
   //POST NOTE this is specific for airbnb data set - you change according to your wishes!
    // When you go to http://localhost:4200/client and input text in "sample addin form" it will display input as JSON in terminal
