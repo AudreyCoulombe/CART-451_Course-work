@@ -49,42 +49,58 @@ db.once("open", async function () {
     // let docCount = await fitBitModel.countDocuments({TrackerDistance:{$gte: 25}}); // Note: await is needed to add a delay, or else it will look for it too quickly and won't find it. Note 2: await has to be in an async function!
     // console.log(docCount);
 
-    // ------------- Query 1:Get the document with the highest value for VeryActiveMinutes ----------  
-    // //let veryActiveMinToNumber = await fitBitModel.updateMany({/*Filter documents.Keep empty for all documents*/}, [{ $set: { "VeryActiveMinutes": { $toDouble: "$VeryActiveMinutes" } } }], { multi: true });
+
+
+    // //------------- Query 1:Get the document with the highest value for VeryActiveMinutes ----------  
+    // //To convert the string value to a decimal one and update the database with the new value. Only has to be done once, then database is changed for good
+    // //let veryActiveMinToNumber = await fitBitModel.updateMany({}, [{$set:{"VeryActiveMinutes":{$toDouble:"$VeryActiveMinutes"}}}], {multi:true});
+    
+    // // Sort all "VeryActiveMinutes" in descending order and pick the first value (the highest one)
     // fitBitModel.find({}).sort({ VeryActiveMinutes: -1 }).limit(1).then((result)=>{ 
     //      console.log(result);
     // });
 
-    // ------------- Query 2: Log average value for VeryActiveMinutes ----------  
-    // //let veryActiveMinToNumber = await fitBitModel.updateMany({/*Filter documents.Keep empty for all documents*/}, [{ $set: { "VeryActiveMinutes": { $toDouble: "$VeryActiveMinutes" } } }], { multi: true });
-    // let docCount = await fitBitModel.countDocuments({}); // Note: await is needed to add a delay, or else it will look for it too quickly and won't find it. Note 2: await has to be in an async function!
+    // //------------- Query 2: Log average value for VeryActiveMinutes ----------
+    // // Count the total number of documents. Note: await is needed to add a delay, or else it will look for it too quickly and won't find it. Note 2: await has to be in an async function!
+    // let docCount = await fitBitModel.countDocuments({});
+    // // Get all the values for the key "VeryActiveMinutes"
     // fitBitModel.find({},'VeryActiveMinutes').then((result)=>{
-    //     let totalVeryActiveMinutes = 0;
-    //     for (let i=0; i<docCount; i++) {
-    //       totalVeryActiveMinutes += result[i].VeryActiveMinutes;
-    //     }
-    //     let averageVeryActiveMinutes = totalVeryActiveMinutes/docCount;
-    //     console.log(averageVeryActiveMinutes);
+    //   // Add up all the values of "VeryActiveMinutes"
+    //   let totalVeryActiveMinutes = 0;
+    //   for (let i=0; i<docCount; i++) {
+    //     totalVeryActiveMinutes += result[i].VeryActiveMinutes;
+    //   }
+    //   // Divide the added values for "VeryActiveMinutes" by the number of documents to get the average VeryActiveMinutes
+    //   let averageVeryActiveMinutes = totalVeryActiveMinutes/docCount;
+    //   console.log(averageVeryActiveMinutes);
     // });
 
-    // ------------- Query 3: get the Id of "healty" people (who made 10000 steps or more and who made 20 minutes of activity or more)----------  
+    // //------------- Query 3: get the Id of "healty" people (who made 10000 steps or more and who made 20 minutes of activity or more)----------  
+    // // Two lines below: To convert the string value to a decimal one and update the database with the new value. Only has to be done once, then database is changed for good
     // //let veryActiveMinToNumber = await fitBitModel.updateMany({/*Filter documents.Keep empty for all documents*/},[{$set: { "VeryActiveMinutes": { $toDouble: "$VeryActiveMinutes" } } }], { multi: true });
     // //let totalStepsToNumber = await fitBitModel.updateMany({/*Filter documents.Keep empty for all documents*/}, [{ $set: { "TotalSteps": { $toDouble: "$TotalSteps" } } }], { multi: true });
+    
+    // // Get the Id of all people that made 10000 steps or more and who were very active 20 minutes or more in a day
     // fitBitModel.find({TotalSteps:{$gte: 10000}, VeryActiveMinutes:{$gte: 20}}, 'Id').then((result)=>{
     //      console.log(result);
     // });
 
-    // ------------- Query 4: get a list or number of distinct Ids ----------  
+    // //------------- Query 4: get a list or number of distinct Ids ----------  
+    // // Find all distinct Ids 
     // fitBitModel.find({}, 'Id').distinct("Id", function(error, results){
-    //   // console.log(results);
-    //   console.log(results.length);
+    //   // console.log(results); // Display a list of distinct Ids in the console
+    //   console.log(results.length); // Display the number of distinct Ids in the console
     // });
 
     // ------------- Query 5: ----------  
-    // const result = fitBitModel.findOne({}, 'Id').explain('TotalSteps');
-    // console.log(result);
+    const result = fitBitModel.findOne({}, 'Id').explain('TotalSteps');
+    console.log(result);
     // fitBitModel.setOptions({ maxTimeMS: 1000 });
-    fitBitModel.getOptions(); // { limit: 10, maxTimeMS: 1000 }
+    // fitBitModel.getOptions(); // { limit: 10, maxTimeMS: 1000 }
+
+    // const snapshotFitBit = fitBitModel.findOne({}, 'Id').snapshot();
+    // console.log(snapshotFitBit);
+
 });
 
 // make server listen for incoming messages

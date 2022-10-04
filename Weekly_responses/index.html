@@ -34,15 +34,57 @@
         <h3 class="question">Question</h3>
         <P class="answer">Answer</P>
 
-        <!-- week 3 -->
-        <h2 class="weekTitle">Week 3</h2>
-        <h3 class="question">Question</h3>
-        <P class="answer">Answer</P>
-
         <!-- week 4 -->
         <h2 class="weekTitle">Week 4</h2>
-        <h3 class="question">Question</h3>
-        <P class="answer">Answer</P>
+        <h3 class="question">Exploration of five queries</h3>
+        <P class="answer">
+        <code >
+          //------------- Query 1:Get the document with the highest value for VeryActiveMinutes ----------  <BR>
+          //To convert the string value to a decimal one and update the database with the new value. Only has to be done once, then database is changed for good<BR>
+          //let veryActiveMinToNumber = await fitBitModel.updateMany({}, [{$set:{"VeryActiveMinutes":{$toDouble:"$VeryActiveMinutes"}}}], {multi:true});<BR>
+            <BR>
+          // Sort all "VeryActiveMinutes" in descending order and pick the first value (the highest one)<BR>
+          fitBitModel.find({}).sort({ VeryActiveMinutes: -1 }).limit(1).then((result)=>{ <BR>
+               console.log(result);<BR>
+          });<BR>
+            <BR>
+          //------------- Query 2: Log average value for VeryActiveMinutes ----------<BR>
+          // Count the total number of documents. Note: await is needed to add a delay, or else it will look for it too quickly and won't find it. Note 2: await has to be in an async function!<BR>
+          let docCount = await fitBitModel.countDocuments({});<BR>
+          // Get all the values for the key "VeryActiveMinutes"<BR>
+          fitBitModel.find({},'VeryActiveMinutes').then((result)=>{<BR>
+            // Add up all the values of "VeryActiveMinutes"<BR>
+            let totalVeryActiveMinutes = 0;<BR>
+            for (let i=0; i<docCount; i++) {<BR>
+              totalVeryActiveMinutes += result[i].VeryActiveMinutes;<BR>
+            }<BR>
+            // Divide the added values for "VeryActiveMinutes" by the number of documents to get the average VeryActiveMinutes<BR>
+            let averageVeryActiveMinutes = totalVeryActiveMinutes/docCount;<BR>
+            console.log(averageVeryActiveMinutes);<BR>
+          });<BR>
+            <BR>
+          //------------- Query 3: get the Id of "healty" people (who made 10000 steps or more and who made 20 minutes of activity or more)----------  <BR>
+          // Two lines below: To convert the string value to a decimal one and update the database with the new value. Only has to be done once, then database is changed for good<BR>
+          //let veryActiveMinToNumber = await fitBitModel.updateMany({/*Filter documents.Keep empty for all documents*/},[{$set: { "VeryActiveMinutes": { $toDouble: "$VeryActiveMinutes" } } }], { multi: true });<BR>
+          //let totalStepsToNumber = await fitBitModel.updateMany({/*Filter documents.Keep empty for all documents*/}, [{ $set: { "TotalSteps": { $toDouble: "$TotalSteps" } } }], { multi: true });<BR>
+            <BR>
+          // Get the Id of all people that made 10000 steps or more and who were very active 20 minutes or more in a day<BR>
+          fitBitModel.find({TotalSteps:{$gte: 10000}, VeryActiveMinutes:{$gte: 20}}, 'Id').then((result)=>{<BR>
+               console.log(result);<BR>
+          });<BR>
+            <BR>
+          //------------- Query 4: get a list or number of distinct Ids ----------  <BR>
+          // Find all distinct Ids <BR>
+          fitBitModel.find({}, 'Id').distinct("Id", function(error, results){<BR>
+            // console.log(results); // Display a list of distinct Ids in the console<BR>
+            console.log(results.length); // Display the number of distinct Ids in the console<BR>
+          });<BR>
+            <BR>
+          // ------------- Query 5: "make this query return detailed execution stats instead of the actual query result"----------  <BR>
+          const result = fitBitModel.findOne({}, 'Id').explain('TotalSteps');<BR>
+          console.log(result);<BR>
+        </code>
+      </P>
 
         <!-- week 5 -->
         <h2 class="weekTitle">Week 5</h2>
