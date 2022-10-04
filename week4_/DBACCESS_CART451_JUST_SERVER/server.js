@@ -92,15 +92,9 @@ db.once("open", async function () {
     //   console.log(results.length); // Display the number of distinct Ids in the console
     // });
 
-    // ------------- Query 5: ----------  
-    const result = fitBitModel.findOne({}, 'Id').explain('TotalSteps');
-    console.log(result);
-    // fitBitModel.setOptions({ maxTimeMS: 1000 });
-    // fitBitModel.getOptions(); // { limit: 10, maxTimeMS: 1000 }
-
-    // const snapshotFitBit = fitBitModel.findOne({}, 'Id').snapshot();
-    // console.log(snapshotFitBit);
-
+    // ------------- Query 5: "make this query return detailed execution stats instead of the actual query result"----------  
+    // const result = fitBitModel.findOne({}, 'Id').explain('TotalSteps');
+    // console.log(result);
 });
 
 // make server listen for incoming messages
