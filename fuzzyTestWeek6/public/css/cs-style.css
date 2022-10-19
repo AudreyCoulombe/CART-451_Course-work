@@ -1,0 +1,85 @@
+body{
+    font-family: 'Roboto', sans-serif;
+
+}
+h2{
+  margin-top:3vh;
+  color:#2e4eb8;
+  margin:0 auto;
+}
+label{
+  color:white;
+  width:40%;
+  display:inline-block;
+  background-color:rgba(255,255,255,.4)
+  
+
+}
+input[type='number']{
+    width:20%;
+    margin-bottom:10px;
+    font-size:12px;
+  }
+  textarea{
+    display:block;
+    width:80%;
+    margin-bottom:10px;
+    font-size:12px;
+
+  }
+  input[type='button']{
+    font-size:12px;
+    }
+    #parentContainer{
+        width:45%;
+        background: #eeeeee;
+        margin-top:2%;
+        padding:20px;
+        margin:0 auto;
+    
+      }
+
+      .searchDiv{
+        display:flex;
+  
+      }
+      .searchDiv >div{
+        width:45%;
+        padding:2%;
+      }
+      
+      .addIn,.searchDiv{
+        background:#2e4eb8;
+        border: 1px solid  #838998;
+        width:95%;
+        padding:1%;
+        height:min-content;
+        color:rgb(158, 196, 246);
+        font-size: 14px;
+      }
+      .addIn p, .searchDiv p {
+        font-size:18px;
+      }
+
+      /* for range*/
+      datalist {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        writing-mode: vertical-lr;
+        width: 98%;
+      }
+      
+      option {
+        padding: 0;
+      }
+      
+      input[type="range"] {
+        width: 98%;
+        margin: 0;
+      }
+
+   
+      
+     
+      

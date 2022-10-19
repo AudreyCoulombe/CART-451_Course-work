@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>FUZZY SETS</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/cs-style.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
+    <script src="js/fuzzy_client.js"></script>
+  </head>
+
+  <body>
+    
+      <div id = "parentContainer">
+        <h2> FUZZY SELECT </h2>
+       
+<div class = "searchDiv">
+  <div>
+  <p>
+    Service Rating:
+    </p>
+<div id = "sVal">sVal</div>
+  <input type="range" min="0" max="10" value="2" step = "0.1" class="slider" id="service">
+  <datalist id="tickmarks">
+    <option value="0" label="bad!"></option>
+    <option value="50" label="good!"></option>
+    <option value="100" label="excellent!"></option>
+  </datalist>
+  </div>
+  <div>
+    <p>
+      Food Rating:
+      </p>
+  <div id = "fVal"> fVal</div>
+    <input type="range" min="0" max="10" value="2" step = "0.1" class="slider" id="food">
+    <datalist id="tickmarks">
+      <option value="0" label="awful!"></option>
+      <option value="100" label="delicious!"></option>
+    </datalist>
+    </div>
+  </div>
+
+<div id = "response" class = 'searchDiv'> the response </div>
+</div> 
+  </body>
+</html>
