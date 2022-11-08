@@ -9,30 +9,30 @@ let app = express(); //make an insatnce of express
 
 let httpServer = require("http").createServer(app); // create a server (using the Express framework object)
 
-// // For mongoose:
-//   require("dotenv").config(); // additional module used to create environment variables for the server in the invisible .env file
-//   const mongoose = require("mongoose");
+// For mongoose:
+  require("dotenv").config(); // additional module used to create environment variables for the server in the invisible .env file
+  const mongoose = require("mongoose");
 
 let bodyParser = require("body-parser");
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-// // For mongoose: 
-//     // get url from .env file
-//     const url = process.env.MONGODB_URI;
-//     // access data model (DBSchema.js)
-//     const imageModel = require("./DBSchema.js");
+// For mongoose: 
+    // get url from .env file
+    const url = process.env.MONGODB_URI;
+    // access data model (DBSchema.js)
+    const imageModel = require("./DBSchema.js");
 
-//     // connect to database
-//     mongoose.connect(url);
-//     let db = mongoose.connection;
-//     db.once("open", async function () {
-//       console.log("connecting to DB");
-//       // ******************* See query assignment for ref on how to manipulate data (DBACCESS_CART451_JUST_SERVER) *********************
-//       imageModel.find({}).then((result)=>{
-//         console.log(result);
-//       });
-//     });
+    // connect to database
+    mongoose.connect(url);
+    let db = mongoose.connection;
+    db.once("open", async function () {
+      console.log("connecting to DB");
+      // ******************* See query assignment for ref on how to manipulate data (DBACCESS_CART451_JUST_SERVER) *********************
+      imageModel.find({}).then((result)=>{
+        console.log(result);
+      });
+    });
 
 //default route
 app.get("/", function (req, res) {
@@ -73,7 +73,7 @@ function handlePost(request, response) {
 
   // ****************************************************************************
   // PUT YOUR BACKEND URL HERE (go here to renew: https://github.com/saharmor/dalle-playground) 
-  let newBackendUrl = "https://emotional-eq-lip-budgets.trycloudflare.com";
+  let newBackendUrl= "https://arrested-lakes-linking-participation.trycloudflare.com";
   // ****************************************************************************
 
   // variable for the number of generated images
@@ -122,4 +122,10 @@ function handlePost(request, response) {
   }
   //just not a valid url in general...
   //response.send("nothing");
+
+
+
+
+
+  
 }

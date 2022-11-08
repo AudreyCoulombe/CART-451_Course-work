@@ -47,3 +47,7 @@ async function checkIfValidBackend(backendUrl) {
     })
 }
 module.exports = {checkIfValidBackend,callDalleService}
+
+
+
+

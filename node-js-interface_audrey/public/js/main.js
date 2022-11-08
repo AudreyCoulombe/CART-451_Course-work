@@ -55,8 +55,7 @@ function go() {
     let generation = answer[2];
     let hobby = answer[3];
 
-    let searchText =
-      "The portrait of a " + gender + " " + generation + " doing " + hobby;
+    let searchText = "The portrait of a " + gender + " " + generation + " doing " + hobby;
     console.log(searchText);
 
     $("#getResDiv").css("display", "none");
