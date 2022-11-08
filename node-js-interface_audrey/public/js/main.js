@@ -118,6 +118,7 @@ function parseResponse(response) {
   $libraryButton.click(function () {
     window.location.href = "portraitsLibrary.html";
   });
+  
 }
 
 // function loadButtons(response){
