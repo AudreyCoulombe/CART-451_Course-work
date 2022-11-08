@@ -1,3 +1,6 @@
+// new! file system for storing image 
+let fs = require("fs");
+
 //DALLE
 let isValidURL = require("./utils.js");
 let backendAPI = require("./backend_api.js");
@@ -29,9 +32,9 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
     db.once("open", async function () {
       console.log("connecting to DB");
       // ******************* See query assignment for ref on how to manipulate data (DBACCESS_CART451_JUST_SERVER) *********************
-      imageModel.find({}).then((result)=>{
-        console.log(result);
-      });
+      // imageModel.find({}).then((result)=>{
+      //   console.log(result);
+      // });
     });
 
 //default route
@@ -39,9 +42,48 @@ app.get("/", function (req, res) {
   res.send("<h1>Hello world</h1>");
 });
 
+// //******************************* */
+// var mongoose = require('mongoose')
+// var assert = require('assert')
+  
+// mongoose.connect('mongodb://localhost/test');
+  
+// var Schema = mongoose.Schema
+// var clubSchema = new Schema({
+//  name: String,
+//  })
+  
+//  var Club = mongoose.model('Club', clubSchema)
+  
+// // note:club = imageModel
+
+//   // Now, the interesting part:
+// data = [
+//      { 'name' : 'Barcelona' },
+//      { 'name' : 'Real Madrid' },
+//      { 'name' : 'Valencia' }
+//    ]
+//    Club.collection.insertMany(data, function(err,r) {
+//          assert.equal(null, err);
+//          assert.equal(3, r.insertedCount);
+   
+//          db.close();
+//    })
+// //******************************* */
 
 
 
+// // note:club = imageModel
+
+//   // Now, the interesting part:
+//   data = [
+//     { 'name' : 'Barcelona' },
+//     { 'name' : 'Real Madrid' },
+//     { 'name' : 'Valencia' }
+//   ]
+//   imageModel.algorithmicPortraits_collection.insert(response[0]);
+
+// //********************* */
 
 // make server listen for incoming messages
 httpServer.listen(portNumber, function () {
@@ -72,8 +114,8 @@ function handlePost(request, response) {
   console.log(promptText);
 
   // ****************************************************************************
-  // PUT YOUR BACKEND URL HERE (go here to renew: https://github.com/saharmor/dalle-playground) 
-  let newBackendUrl= "https://arrested-lakes-linking-participation.trycloudflare.com";
+  // PUT BACKEND URL HERE (go here to renew: https://github.com/saharmor/dalle-playground) 
+  let newBackendUrl= "https://retro-consider-coach-pressed.trycloudflare.com";
   // ****************************************************************************
 
   // variable for the number of generated images
@@ -105,14 +147,44 @@ function handlePost(request, response) {
               // Note: images back from Dall-e are encoded in base64
               // Note: base64 is "a group of binary-to-text encoding schemes that represent binary data in an ASCII string format"
               // ******************* EXAMPLE OF HOW TO USE THIS DATA IN <img> TAG: <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P48/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
-              imageDataArray.push({
-                imgSrc: `data:image/${generatedImagesFormat};base64,${imagesBackFromDalleArray[i]}`, 
+             
+
+              fs.writeFileSync(`public/images/${promptText}.${generatedImagesFormat}`,imagesBackFromDalleArray[i], 'base64', function(err){});
+              
+              imageDataArray.push(new imageModel ({
+                imgSrc: `public/images/${promptText}.${generatedImagesFormat}`, 
                 title: "Download image",
-                downloadedFilename: `${promptText}_.${generatedImagesFormat}`,
-              });
+                downloadedFilename: `${promptText}_.${generatedImagesFormat}`, 
+                // title: `${promptText}`,
+                // name: "name",
+                // path: `public/images/${promptText}.${generatedImagesFormat}`,
+              }));
+
+              // fs.writeFile(`public/images/${promptText}.${generatedImagesFormat}`,imagesBackFromDalleArray[i], 'base64', function(err){});
+
+              console.log(imageDataArray[0]);
+
+              // use file system (fs) to store image in image folder
+              
+              imageModel.algorithmicPortraits_collection.insertOne({title: "test"});
+            // imageDataArray[0].save(); // add.then
+              // imageDataArray[0].insertOne(); // add.then
+              // imageModel.algorithmicPortraits_collection.insertOne(imageDataArray[0]);
             }
-            // Send the array of images data to client ********************SEND TO SERVER INSTEAD?*******************************
+            // Send the array of images data to client ********************SEND TO Mongo DB INSTEAD?*******************************
             response.send(imageDataArray);
+
+
+
+            // 
+
+            // ****************** NEW
+
+            
+
+            // 
+            // *********************
+
             console.log("imageDataArray:"); console.log(imageDataArray);
           });
       } else {
@@ -122,9 +194,6 @@ function handlePost(request, response) {
   }
   //just not a valid url in general...
   //response.send("nothing");
-
-
-
 
 
   

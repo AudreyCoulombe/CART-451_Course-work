@@ -99,9 +99,19 @@ input[type="button"] {
   font-size: 40px;
 }
 
+#libraryContainer div {
+  width: 20%;
+  height: 20%;
+  background-color: #9a99cc;
+  padding: 10px;
+  padding-top: 10px;
+  margin: 5px;
+  display: inline-block;
+  border-radius: 2%;
+}
 #libraryContainer img {
-  width: 30%;
-  height: 30%;
+  width: 100%;
+  height: 100%;
 }
 
 /* #getResPos{
