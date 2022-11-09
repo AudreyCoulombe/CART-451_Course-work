@@ -95,15 +95,8 @@ function parseResponse(response) {
     .attr("src", response[0].imgSrc)
     .appendTo("#resultsContainer");
 
-  // SEE ALSO INDEX.JS LINE 35 FOR CODE APPENDING IMAGE TO PORTRAITS LIBRARY
-  // let portraitInLib = $("<img>").attr("src",response[0].imgSrc).appendTo("#libraryContainer");
-  let portraitInLib = $("<img>")
-    .attr("src", response[0].imgSrc)
-    .appendTo($("body"));
-  // loadedImage = "loadedImageVar";
-  // console.log(loadedImage);
-
   // Add button to take quiz again
+  let lineBreak = $("<br>").appendTo("#resultsContainer");
   let $retry = $('<input type="button" value="Take quiz again" />');
   $retry.appendTo("#resultsContainer");
   $retry.click(function () {

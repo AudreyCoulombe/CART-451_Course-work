@@ -115,7 +115,7 @@ function handlePost(request, response) {
 
   // ****************************************************************************
   // PUT BACKEND URL HERE (go here to renew: https://github.com/saharmor/dalle-playground) 
-  let newBackendUrl= "https://retro-consider-coach-pressed.trycloudflare.com";
+  let newBackendUrl= "https://marriott-compared-purposes-gbp.trycloudflare.com";
   // ****************************************************************************
 
   // variable for the number of generated images
@@ -148,42 +148,37 @@ function handlePost(request, response) {
               // Note: base64 is "a group of binary-to-text encoding schemes that represent binary data in an ASCII string format"
               // ******************* EXAMPLE OF HOW TO USE THIS DATA IN <img> TAG: <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P48/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
              
-
+              // use file system (fs) to store image in image folder
               fs.writeFileSync(`public/images/${promptText}.${generatedImagesFormat}`,imagesBackFromDalleArray[i], 'base64', function(err){});
               
-              imageDataArray.push(new imageModel ({
-                imgSrc: `public/images/${promptText}.${generatedImagesFormat}`, 
+              imageDataArray.push(/*new imageModel (*/{
+                imgSrc:`data:image/${generatedImagesFormat};base64,${imagesBackFromDalleArray[i]}`,
                 title: "Download image",
-                downloadedFilename: `${promptText}_.${generatedImagesFormat}`, 
+                downloadedFilename:`${promptText}_.${generatedImagesFormat}`
+                
+                // imgSrc: `public/images/${promptText}.${generatedImagesFormat}`, 
+                // title: "Download image",
+                // downloadedFilename: `${promptText}_.${generatedImagesFormat}`, 
+                
+                
                 // title: `${promptText}`,
                 // name: "name",
                 // path: `public/images/${promptText}.${generatedImagesFormat}`,
-              }));
+              }/*)*/);
 
               // fs.writeFile(`public/images/${promptText}.${generatedImagesFormat}`,imagesBackFromDalleArray[i], 'base64', function(err){});
 
               console.log(imageDataArray[0]);
 
-              // use file system (fs) to store image in image folder
               
-              imageModel.algorithmicPortraits_collection.insertOne({title: "test"});
+              
+              // imageModel.algorithmicPortraits_collection.insertOne({title: "test"});
             // imageDataArray[0].save(); // add.then
               // imageDataArray[0].insertOne(); // add.then
               // imageModel.algorithmicPortraits_collection.insertOne(imageDataArray[0]);
             }
             // Send the array of images data to client ********************SEND TO Mongo DB INSTEAD?*******************************
             response.send(imageDataArray);
-
-
-
-            // 
-
-            // ****************** NEW
-
-            
-
-            // 
-            // *********************
 
             console.log("imageDataArray:"); console.log(imageDataArray);
           });
