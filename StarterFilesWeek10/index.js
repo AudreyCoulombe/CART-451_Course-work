@@ -1,3 +1,7 @@
+// in terminal, type "node index.js"
+
+
+
 // const portNumber = 4200;
 // const app = express(); //make an instance of express
 // const server = require("http").createServer(app);
@@ -13,7 +17,7 @@ let WordCount= require('./wordCount');
 let fs = require('fs');
 
 // And we'll look at all files in the jane austen directory
-let file = fs.readFileSync('files/cat.txt', 'utf8');
+let file = fs.readFileSync('files/cat.txt', 'utf8'); // look for wikipedia text on cat (in "files" folder)
 //console.log(file);
 
 

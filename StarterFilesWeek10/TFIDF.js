@@ -1,3 +1,5 @@
+// NOTE: can be accessed with natural: http://naturalnode.github.io/natural/tfidf.html 
+
 class TFIDF{
     constructor() {
       //going to keep track of which words were found and how many

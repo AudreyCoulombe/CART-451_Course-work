@@ -1,7 +1,5 @@
-// const portNumber = 4200;
-// const app = express(); //make an instance of express
-// const server = require("http").createServer(app);
-// Pulling our concordance object from a separate "module" - concordance.js
+// NOTE: can be accessed with natural: http://naturalnode.github.io/natural/tfidf.html 
+
 // Load a file for quick testing
 
 const TFIDF = require('./TFIDF');
