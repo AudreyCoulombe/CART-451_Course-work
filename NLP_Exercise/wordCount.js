@@ -88,10 +88,6 @@ sortByCount() {
       return (wordFreq.getCount(b) - wordFreq.getCount(a));
     });
   }
-
-
-  
-  
 }
   
 module.exports = WordCount;

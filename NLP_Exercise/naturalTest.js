@@ -42,20 +42,20 @@ var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
 
 
 
-// Use wordnet (https://wordnet.princeton.edu/)
-// http://naturalnode.github.io/natural/wordnet.html
-// WordNet® is a large lexical database of English. Nouns, verbs, adjectives and adverbs are grouped into sets of cognitive synonyms (synsets), each expressing a distinct concept.
-// wordnet can be accessed with natural
-// ***********************install wordnet.db: npm install wordnet-db
-var wordnet = new natural.WordNet();
+// // Use wordnet (https://wordnet.princeton.edu/)
+// // http://naturalnode.github.io/natural/wordnet.html
+// // WordNet® is a large lexical database of English. Nouns, verbs, adjectives and adverbs are grouped into sets of cognitive synonyms (synsets), each expressing a distinct concept.
+// // wordnet can be accessed with natural
+// // ***********************install wordnet.db: npm install wordnet-db
+// var wordnet = new natural.WordNet();
 
-wordnet.lookup('chair', function(results) { //looks up on the internet
-    results.forEach(function(result) {
-        // console.log('------------------------------------');
-        // console.log(result.synsetOffset);
-        // console.log(result.pos);
-        // console.log(result.lemma);
-        // console.log(result.synonyms);
-        // console.log(result.gloss);
-    });
-});
+// wordnet.lookup('chair', function(results) { //looks up on the internet
+//     results.forEach(function(result) {
+//         // console.log('------------------------------------');
+//         // console.log(result.synsetOffset);
+//         // console.log(result.pos);
+//         // console.log(result.lemma);
+//         // console.log(result.synonyms);
+//         // console.log(result.gloss);
+//     });
+// });
