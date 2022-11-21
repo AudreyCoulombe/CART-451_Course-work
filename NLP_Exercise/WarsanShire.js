@@ -52,29 +52,33 @@ let uniqueStem = {
 }
 frequentStems.push(uniqueStem);
 //for each frequent words in Warsan Shire<s texts...
-for (let i = 0; i < shireFrequentWords.length; i++) {
-    // look for each element in frequentStem array
-    for (let j=0; j<frequentStems.length; j++) {
-      // if the stem of the word in shireFrequentWords is NOT THE SAME as the stem in frequentStem...
-      if (shireFrequentWords[i].stem != frequentStems[j].stem) {
-        // create a new object with the new stem and push it in the frequentStems array
-        let uniqueStem = {
-          stem: shireFrequentWords[i].stem,
-          words: [shireFrequentWords[i].word],
-        }
-        frequentStems.push(uniqueStem);
-      } 
-      // if the stem of the word in shireFrequentWords IS THE SAME as the stem in frequentStem...
-      else if (shireFrequentWords[i].stem == frequentStems[j].stem) {
-        // add the original word in the word list associated with the stem
-        frequentStems[j].words.push(shireFrequentWords[i].word);
+// for (let i = 0; i < shireFrequentWords.length; i++) {
+//     // look for each element in frequentStem array
+    
+// }
+shireFrequentWords.forEach(checkIfUniqueStem);
+
+function checkIfUniqueStem(item,index) {
+  for (let i=0; i<frequentStems.length; i++) {
+    // if the stem of the word in shireFrequentWords is NOT THE SAME as the stem in frequentStem...
+    if (item.stem != frequentStems[i].stem) {
+      // create a new object with the new stem and push it in the frequentStems array
+      let uniqueStem = {
+        stem: item.stem,
+        words: [item.word],
       }
+      frequentStems.push(uniqueStem);
+    } 
+    // if the stem of the word in shireFrequentWords IS THE SAME as the stem in frequentStem...
+    else if (item.stem == frequentStems[i].stem) {
+      console.log("ALREADY A STEM: " + item.stem);
+      // add the original word in the word list associated with the stem
+      frequentStems[i].words.push(item.word);
     }
+  }
 }
 
-function checkIfUnique() {
-  
-}
+console.log(frequentStems);
 
 // for (let i = 0; i < shireFrequentWords.length; i++) {
 //   console.log("in shireFrequentWords loop")
@@ -92,10 +96,10 @@ function checkIfUnique() {
 //     }
 // }
 
-for (let i=0; i<frequentStems.length; i++) {
-  console.log(frequentStems[i]);
-  console.log("in for loop");
-}
+// for (let i=0; i<frequentStems.length; i++) {
+//   console.log(frequentStems[i]);
+//   console.log("in for loop");
+// }
 
 
 /********************************************* TF-IDF ****************************************/
