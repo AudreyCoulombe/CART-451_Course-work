@@ -59,9 +59,9 @@ frequentStems.push(uniqueStem);
 shireFrequentWords.forEach(checkIfUniqueStem);
 
 function checkIfUniqueStem(item,index) {
-  for (let i=0; i<frequentStems.length; i++) {
-    // if the stem of the word in shireFrequentWords is NOT THE SAME as the stem in frequentStem...
-    if (item.stem != frequentStems[i].stem) {
+  frequentStems.forEach(function(stemItem,stemIndex){
+     // if the stem of the word in shireFrequentWords is NOT THE SAME as the stem in frequentStem...
+     if (item.stem != frequentStems[stemIndex].stem) {
       // create a new object with the new stem and push it in the frequentStems array
       let uniqueStem = {
         stem: item.stem,
@@ -70,12 +70,13 @@ function checkIfUniqueStem(item,index) {
       frequentStems.push(uniqueStem);
     } 
     // if the stem of the word in shireFrequentWords IS THE SAME as the stem in frequentStem...
-    else if (item.stem == frequentStems[i].stem) {
-      console.log("ALREADY A STEM: " + item.stem);
-      // add the original word in the word list associated with the stem
-      frequentStems[i].words.push(item.word);
+    else if (item.stem == frequentStems[stemIndex].stem) {
+      // console.log("ALREADY A STEM: " + item.stem);
+      // // add the original word in the word list associated with the stem
+      // frequentStems[stemIndex].words.push(item.word);
     }
-  }
+  })
+  
 }
 
 console.log(frequentStems);
