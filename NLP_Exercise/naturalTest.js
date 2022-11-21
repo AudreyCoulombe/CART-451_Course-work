@@ -7,12 +7,14 @@ let natural = require("natural");
 // Tokes: http://naturalnode.github.io/natural/Tokenizers.html
 let tokenizer = new natural.WordTokenizer();
 let tokens = tokenizer.tokenize("the lazy dog jumped over the high mountains."); //here, could be reading from txt file
-console.log(tokens);
+// console.log(tokens);
 
 // stemmers: http://naturalnode.github.io/natural/stemmers.html
 // porter stemmer = to consider plural??
 // console.log(natural.PorterStemmer.stem(tokens[7]));
-
+for (let i = 0; i < tokens.length; i++) {
+    console.log(natural.PorterStemmer.stem(tokens[i]));
+}
 
 // consider multiple sentences
 
@@ -38,7 +40,6 @@ var lexicon = new natural.Lexicon(language, defaultCategory, defaultCategoryCapi
 var ruleSet = new natural.RuleSet('EN');
 var tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
 // console.log(tagger.tag(tokens));
-
 
 
 
