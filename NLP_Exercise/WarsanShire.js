@@ -1,25 +1,8 @@
-/* To do:
-  - Ask Sabine what tokenize can be used for in this context
-
-*/
-
-
-// const portNumber = 4200;
-// const app = express(); //make an instance of express
-// const server = require("http").createServer(app);
-
-// // make server listen for incoming messages
-// server.listen(portNumber, function () {
-//     console.log("listening on port:: " + portNumber);
-//   });
-
-
 let natural = require("natural");
 let fs = require("fs");
 
-let countTreshold = 0;
+let countTreshold = 4;
 let tfidfTreshold = 0;
-
 
 /********************************************* WARSAN SHIRE'S WORD COUNT *****************************************/
 /*(For each word in WARSAN SHIRE's texts, check how many times it was used and store the most used in an array)*/
@@ -29,18 +12,17 @@ const WordCount = require("./wordCount");
 // Create a new instance of WordCount class (from wordCount.js)
 let shireWordCount = new WordCount();
 // Look at Warsan Shire's poems in files folder
-// let warsanShirePoems = fs.readFileSync("files/WarsanShireTexts.txt", "utf8");
-let warsanShirePoems = fs.readFileSync("files/WarsanShireTexts_test.txt", "utf8");
+let warsanShirePoems = fs.readFileSync("files/WarsanShireTexts.txt", "utf8");
+// let warsanShirePoems = fs.readFileSync("files/WarsanShireTexts_test.txt", "utf8");
 shireWordCount.process(warsanShirePoems);
 shireWordCount.sortByCount();
 // shireWordCount.logTheDict();
 
 // For each word with a count higher than *countTreshold*, create an object with the word and its count and push it in an array
-let shireFrequentWords = [];
+shireFrequentWords = [];
 for (let i = 0; i < shireWordCount.keys.length; i++) {
- 
   let wordStem = natural.PorterStemmer.stem(shireWordCount.keys[i]);
-  
+  let wordPOS = getPOS(shireWordCount.keys[i]);
   if (shireWordCount.dict[shireWordCount.keys[i]] > countTreshold) {
     let wordObj = {
       word: shireWordCount.keys[i],
@@ -48,80 +30,50 @@ for (let i = 0; i < shireWordCount.keys.length; i++) {
       POS: getPOS(shireWordCount.keys[i]),
       count_in_Shires_poems: shireWordCount.dict[shireWordCount.keys[i]],
     };
-    shireFrequentWords.push(wordObj);
-    // console.log(wordObj);
+    if (wordObj.POS == "NN" || wordObj.POS == "JJ"){ 
+      shireFrequentWords.push(wordObj);
+    }
   }
 }
-// console.log(shireFrequentWords[0]);
-
-
-let frequentStems = [];
-
-// console.log(frequentStems);
-
-// for (let i=0; i < shireFrequentWords.length; i++) {
-//   // console.log(i);
-//   let uniqueStem = {
-//     stem: shireFrequentWords[i].stem,
-//     words: /*[*/shireFrequentWords[i].word/*]*/,
-//   }
-//   // console.log(uniqueStem);
-//   frequentStems.push(uniqueStem);
+// for (let i = 0; i<shireFrequentWords.length; i++){
+//   console.log(shireFrequentWords[i]);
 // }
 
-// console.log(frequentStems);
-
-// frequentStems.forEach(function(item,index){
-//   for (let i=0; i<frequentStems.length; i++){
-//     // if the stem of the word in shireFrequentWords is NOT THE SAME as the stem in frequentStem...
-//      if (item.stem != frequentStems[stemIndex].stem) {
-//       // create a new object with the new stem and push it in the frequentStems array
-//       let uniqueStem = {
-//         stem: item.stem,
-//         words: [item.word],
-//       }
-//       frequentStems.push(uniqueStem);
-//       console.log(frequentStems);
-//     } 
-//     // if the stem of the word in shireFrequentWords IS THE SAME as the stem in frequentStem...
-//     else if (item.stem == frequentStems[stemIndex].stem) {
-//       // console.log("ALREADY A STEM: " + item.stem);
-//       // // add the original word in the word list associated with the stem
-//       // frequentStems[stemIndex].words.push(item.word);
-//     }
-//   }
-// });
-
-
+let frequentStems = [];
 let firstStem = {
   stem: shireFrequentWords[0].stem,
   words: [shireFrequentWords[0].word],
 }
 frequentStems.push(firstStem);
 
+// For each word in shireFrequentWords, run checkIfUniqueStem fct
 shireFrequentWords.forEach(checkIfUniqueStem);
-
-
+// create an array of unique stem for shireFrequentWords
 function checkIfUniqueStem(item,index) {
-  frequentStems.forEach(function(stemItem,stemIndex){
-     // if the stem of the word in shireFrequentWords is NOT THE SAME as the stem in frequentStem...
-     if (item.stem != frequentStems[stemIndex].stem) {
-      // create a new object with the new stem and push it in the frequentStems array
-      let uniqueStem = {
-        stem: item.stem,
-        words: [item.word],
-      }
-      frequentStems.push(uniqueStem);
-      // console.log(frequentStems);
-    } 
-    // if the stem of the word in shireFrequentWords IS THE SAME as the stem in frequentStem...
-    else if (item.stem == frequentStems[stemIndex].stem) {
-      // console.log("ALREADY A STEM: " + item.stem);
-      // // add the original word in the word list associated with the stem
-      // frequentStems[stemIndex].words.push(item.word);
+  let wordIndex = 0;
+  let sameStemFound = "false";
+  
+  while(sameStemFound == "false" && wordIndex < frequentStems.length) {
+    if (item.stem == frequentStems[wordIndex].stem) {
+      sameStemFound = "true";
+      // console.log("same stem found!!")
+      frequentStems[wordIndex].words.push(item.word);
+      // console.log("ADDING NEW WORD TO AN ALREADY EXISTING STEM");
     }
-  })
+      wordIndex++;
+  }
+
+  if (frequentStems.length >= wordIndex && sameStemFound == "false") {
+        // create a new object with the new stem and push it in the frequentStems array
+          let uniqueStem = {
+            stem: item.stem,
+            words: [item.word],
+          }
+          frequentStems.push(uniqueStem);
+          // console.log("ADDING NEW STEM IN ARRAY");
+      }
 }
+
 // console.log(frequentStems);
 
 /********************************************* TF-IDF ****************************************/
@@ -173,36 +125,27 @@ tfIDF.finish(filenames.length);
 tfIDF.sortByScore();
 //   tfIDF.logTheDict();
 
-// Look for Warsan Shire's most frequent words in tfIDF.keys array and when it is found, 
+
+
+// // Look for Warsan Shire's most frequent words in tfIDF.keys array and when it is found, add count (in all docs), number of documents with the word and tfidf keys and values in the object
 // For all words in in all files...
 for (let i = 0; i < tfIDF.keys.length; i++) {
   // For all words in shireFrequentWords array...
   for (let j = 0; j < shireFrequentWords.length; j++) {
     // If the word in shireFrequentWords array is the same as the word in tfIDF
     if (tfIDF.dict[tfIDF.keys[i]].word == shireFrequentWords[j].word) {
-      
-      
       // If the tfidf value of the word is above the treshold...
-      if (tfIDF.dict[tfIDF.keys[i]].tfidf > tfidfTreshold) {
-
-        // let wordStem = natural.PorterStemmer.stem(shireFrequentWords[j].word);
-        
-        
-        getPOS(shireFrequentWords[j].word);
         // Assign docCount and tfidf values to it
         Object.assign(shireFrequentWords[j], {
-        // POS: getPOS(shireFrequentWords[j].word),
-        // stem: wordStem,
-        count_in_all_docs: tfIDF.dict[tfIDF.keys[i]].count,
-        docs_with_it: tfIDF.dict[tfIDF.keys[i]].docCount,
-        tfidf: tfIDF.dict[tfIDF.keys[i]].tfidf,
+          count_in_all_docs: tfIDF.dict[tfIDF.keys[i]].count,
+          docs_with_it: tfIDF.dict[tfIDF.keys[i]].docCount,
+          tfidf: tfIDF.dict[tfIDF.keys[i]].tfidf,
         }); 
-        // console.log(shireFrequentWords[j]);
-      }
+        console.log(shireFrequentWords[j]);
     }
   }
 }
-console.log(shireFrequentWords);
+
 
 // For "parts of speech": http://naturalnode.github.io/natural/brill_pos_tagger.html
 // To know if DT (determinant), VB (verb), NN (noun), etc.
