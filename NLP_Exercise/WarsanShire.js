@@ -4,6 +4,16 @@
 */
 
 
+// const portNumber = 4200;
+// const app = express(); //make an instance of express
+// const server = require("http").createServer(app);
+
+// // make server listen for incoming messages
+// server.listen(portNumber, function () {
+//     console.log("listening on port:: " + portNumber);
+//   });
+
+
 let natural = require("natural");
 let fs = require("fs");
 
@@ -42,21 +52,55 @@ for (let i = 0; i < shireWordCount.keys.length; i++) {
     // console.log(wordObj);
   }
 }
-// console.log(shireFrequentWords);
+// console.log(shireFrequentWords[0]);
 
 
 let frequentStems = [];
-let uniqueStem = {
+
+// console.log(frequentStems);
+
+// for (let i=0; i < shireFrequentWords.length; i++) {
+//   // console.log(i);
+//   let uniqueStem = {
+//     stem: shireFrequentWords[i].stem,
+//     words: /*[*/shireFrequentWords[i].word/*]*/,
+//   }
+//   // console.log(uniqueStem);
+//   frequentStems.push(uniqueStem);
+// }
+
+// console.log(frequentStems);
+
+// frequentStems.forEach(function(item,index){
+//   for (let i=0; i<frequentStems.length; i++){
+//     // if the stem of the word in shireFrequentWords is NOT THE SAME as the stem in frequentStem...
+//      if (item.stem != frequentStems[stemIndex].stem) {
+//       // create a new object with the new stem and push it in the frequentStems array
+//       let uniqueStem = {
+//         stem: item.stem,
+//         words: [item.word],
+//       }
+//       frequentStems.push(uniqueStem);
+//       console.log(frequentStems);
+//     } 
+//     // if the stem of the word in shireFrequentWords IS THE SAME as the stem in frequentStem...
+//     else if (item.stem == frequentStems[stemIndex].stem) {
+//       // console.log("ALREADY A STEM: " + item.stem);
+//       // // add the original word in the word list associated with the stem
+//       // frequentStems[stemIndex].words.push(item.word);
+//     }
+//   }
+// });
+
+
+let firstStem = {
   stem: shireFrequentWords[0].stem,
   words: [shireFrequentWords[0].word],
 }
-frequentStems.push(uniqueStem);
-//for each frequent words in Warsan Shire<s texts...
-// for (let i = 0; i < shireFrequentWords.length; i++) {
-//     // look for each element in frequentStem array
-    
-// }
+frequentStems.push(firstStem);
+
 shireFrequentWords.forEach(checkIfUniqueStem);
+
 
 function checkIfUniqueStem(item,index) {
   frequentStems.forEach(function(stemItem,stemIndex){
@@ -68,6 +112,7 @@ function checkIfUniqueStem(item,index) {
         words: [item.word],
       }
       frequentStems.push(uniqueStem);
+      // console.log(frequentStems);
     } 
     // if the stem of the word in shireFrequentWords IS THE SAME as the stem in frequentStem...
     else if (item.stem == frequentStems[stemIndex].stem) {
@@ -76,32 +121,8 @@ function checkIfUniqueStem(item,index) {
       // frequentStems[stemIndex].words.push(item.word);
     }
   })
-  
 }
-
-console.log(frequentStems);
-
-// for (let i = 0; i < shireFrequentWords.length; i++) {
-//   console.log("in shireFrequentWords loop")
-//     for (let j=0; j<frequentStems.length; j++) { // forEach instead?
-//       console.log("in frequentStems loop")
-//       if (shireFrequentWords[i].stem != frequentStems[j].stem) {
-//         let uniqueStem = {
-//           stem: shireFrequentWords[i].stem,
-//           words: [shireFrequentWords[i].word],
-//         }
-//         frequentStems.push(uniqueStem);
-//       } else if (shireFrequentWords[i].stem == frequentStems[j].stem) {
-//         frequentStems[j].words.push(shireFrequentWords[i].word);
-//       }
-//     }
-// }
-
-// for (let i=0; i<frequentStems.length; i++) {
-//   console.log(frequentStems[i]);
-//   console.log("in for loop");
-// }
-
+// console.log(frequentStems);
 
 /********************************************* TF-IDF ****************************************/
 /*(Compare word frequency in Warasan Shire's texts with word frequency in other texts.  )*/
@@ -181,7 +202,7 @@ for (let i = 0; i < tfIDF.keys.length; i++) {
     }
   }
 }
-
+console.log(shireFrequentWords);
 
 // For "parts of speech": http://naturalnode.github.io/natural/brill_pos_tagger.html
 // To know if DT (determinant), VB (verb), NN (noun), etc.
@@ -206,4 +227,6 @@ function tokenizeWord(word) {
 
   return token;
 }
+
+
 
