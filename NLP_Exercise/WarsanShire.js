@@ -89,22 +89,22 @@ let tfIDF = new TFIDF();
 let filenames = [
   "WarsanShireTexts.txt",
 
-  "RichardSiken.txt",
-  "ShermanAlexie.txt",
-  "WendellBerry.txt",
-  "WilliamButlerYeats.txt",
-  "JamesLongenbach.txt",
-  "JosueGuebo.txt",
-  "RonRash.txt",
+  // "RichardSiken.txt",
+  // "ShermanAlexie.txt",
+  // "WendellBerry.txt",
+  // "WilliamButlerYeats.txt",
+  // "JamesLongenbach.txt",
+  // "JosueGuebo.txt",
+  // "RonRash.txt",
 
-  // "fish.txt",
-  // "rainbow.txt",
-  // "cat.txt",
-  // "phadke.txt",
-  // "eclipse.txt",
-  // "sports.txt",
-  // "test.txt",
-  // "tree.txt",
+  "fish.txt",
+  "rainbow.txt",
+  "cat.txt",
+  "phadke.txt",
+  "eclipse.txt",
+  "sports.txt",
+  "test.txt",
+  "tree.txt",
 ];
 
 // For all terms in all files, calculate term frequency

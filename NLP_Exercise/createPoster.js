@@ -292,31 +292,37 @@ let words = [
 ]
 
 function go () {
+  // For every chosen word...
     for (let i= 0; i<words.length; i++) {
+       
+      // create a paragraphe and add the word to it
         let para = document.createElement("p");
         const text = document.createTextNode(words[i].word);
+        para.appendChild(text);
+        // Set opacity, size and position
         let opacity = getOpacity(words[i].tfidf);
         let size = getSize(words[i]);
         let positionX = Math.random()* 100 + 50;
         let positionY = Math.random()* 100 + 150;
-        
-        if (words[i].POS == "NN") {
-          para.style.color = `rgb(0, 0, 255, ${opacity})`;
-        }
-        else if (words[i].POS == "JJ") {
-          para.style.color = `rgb(148, 52, 0, ${opacity})`;
-        }
         para.style.fontSize = `${size}px`;
-
         para.style.position = "absolute";
         para.style.top = `${positionY}px`;
         para.style.left = `${positionX}px`;
-        para.appendChild(text);
-        const element = document.getElementById("poster");
-        element.appendChild(para);
+
+        // if it is a noun, assign the color blue and opacity proportional to its TF-IDF
+        if (words[i].POS == "NN") {
+          para.style.color = `rgb(0, 0, 255, ${opacity})`;
+        }
+        // if it is an adjective, assign the color orange and opacity proportional to its TF-IDF
+        else if (words[i].POS == "JJ") {
+          para.style.color = `rgb(148, 52, 0, ${opacity})`;
+        }
+        // append the new paragraph to the poster div
+        document.getElementById("poster").appendChild(para);
     }
 }
 
+// set opacity of the word proportionally to its TF-IDF
 function getOpacity(wordTFIDF) {
   let maxTFIDF = 0;
   let minTFIDF = 100;
@@ -328,10 +334,11 @@ function getOpacity(wordTFIDF) {
       minTFIDF = words[i].tfidf;
     }
   }
-  let opacity = (((wordTFIDF - minTFIDF) * (1.1 - 0)) / (maxTFIDF - minTFIDF)) + 0;
+  let opacity = (((wordTFIDF - minTFIDF) * (1 - 0)) / (maxTFIDF - minTFIDF)) + 0;
   return opacity;
 }
 
+// set the size of the word proportionally to its count in Warsan Shires poems
 function getSize(word){
   let wordCount = word.count_in_Shires_poems;
   let maxCount = 0;
